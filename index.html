@@ -22,8 +22,12 @@
       div .book-card
         h2 .book-title
         h3 .book-author
-        img .book-read
-        img .book-remove
+        span .icon-btn .btn-read
+          img:eye-plus.svg .icon-read
+        /span
+        span .icon-btn .btn-remove
+          img:delete.svg .icon-remove
+        /span
         p .book-pages
         p .book-read
       /div
@@ -31,8 +35,12 @@
     <div class="book-card">
       <h2 class="book-title">Title</h2>
       <h3 class="book-author">Author</h3>
-      <img role="button" src="./icons/eye-plus-outline.svg" class="icon-btn icon-read">
-      <img role="button" src="./icons/delete-outline.svg" class="icon-btn icon-remove">
+      <span class="icon-btn btn-read">
+        <img src="./icons/eye-plus.svg" class="icon-read">
+      </span>
+      <span class="icon-btn btn-remove">
+        <img src="./icons/delete.svg" class="icon-remove">
+      </span>
       <p class="book-pages">125 Pages</p>
       <p class="book-read">Read</p>
     </div>
