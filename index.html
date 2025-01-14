@@ -33,5 +33,60 @@
       /div
     -->
   </div>
+
+  <dialog>
+    <form action="" id="NewBookForm">
+      <fieldset>
+        <legend>New book</legend>
+
+        <p class="title-area">
+          <label for="new-book-title">Title</label>
+          <input 
+            type="text" 
+            id="new-book-title" 
+            name="title" 
+            placeholder="The Martian"
+            minlength="1"
+            maxlength="50"
+            required>
+        </p>
+        
+        <p class="author-area">
+          <label for="new-book-author">Author</label>
+          <input 
+            type="text" 
+            id="new-book-author" 
+            name="author" 
+            placeholder="Andy Weir"
+            minlength="1"
+            maxlength="50"
+            required>
+        </p>
+        
+        <p class="pages-area">
+          <label for="new-book-pages">Pages</label>
+          <input 
+            type="number" 
+            id="new-book-pages" 
+            name="pages" 
+            placeholder="369"
+            min="1"
+            max="9999"
+            step="1"
+            required>
+        </p>
+        
+        <p class="read-area">
+          <label for="new-book-read">Have read?</label>
+          <input type="checkbox" name="have-read" id="new-book-read">
+        </p>
+      </fieldset>
+      
+      <div class="form-btn-section">
+        <button type="button" id="cancel-new-book">Cancel</button>
+        <button type="submit" id="submit-new-book">Add book</button>
+      </div>
+    </form>
+  </dialog>
 </body>
 </html>
