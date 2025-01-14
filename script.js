@@ -4,6 +4,7 @@ const display = document.querySelector('.display-container');
 
 const addBookBtn = document.querySelector('.add-book-btn');
 addBookBtn.addEventListener('click', () => {
+  dialog.showModal();
   // Append form to add a book
   const randomIndex = Math.floor(Math.random() * 23);
   const books = [
@@ -34,7 +35,6 @@ addBookBtn.addEventListener('click', () => {
   const selectedBook = books[randomIndex];
   addBook(selectedBook[0], selectedBook[1], selectedBook[2], selectedBook[3]);
 });
-
 
 function Book(id, title, author, pages, haveRead) {
   this.id = id;
@@ -172,3 +172,26 @@ function clickRemove() {
   library.splice(bookIndex, 1);
   updateDisplay();
 }
+
+// --- Handle dialog ---
+const dialog = document.querySelector('dialog');
+dialog.showModal();
+
+const newBookForm = document.forms.NewBookForm;
+newBookForm.addEventListener('submit', (event) => {
+  const newBookData = new FormData(newBookForm);
+
+  const bookTitle = newBookData.get('title');
+  const bookAuthor = newBookData.get('author');
+  const bookPages = newBookData.get('pages');
+  const bookReadStatus = newBookData.get('have-read') === 'on' ? 'Yes' : 'No';
+
+  alert(`Title: ${bookTitle}\nAuthor: ${bookAuthor}\nPages: ${bookPages}\nRead: ${bookReadStatus}`);
+
+  event.preventDefault();
+});
+
+const cancelFormBtn = document.querySelector('#cancel-new-book');
+cancelFormBtn.addEventListener('click', () => {
+  dialog.close();
+});
