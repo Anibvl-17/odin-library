@@ -5,35 +5,6 @@ const display = document.querySelector('.display-container');
 const addBookBtn = document.querySelector('.add-book-btn');
 addBookBtn.addEventListener('click', () => {
   dialog.showModal();
-  // Append form to add a book
-  const randomIndex = Math.floor(Math.random() * 23);
-  const books = [
-    ['The Hobbit', 'J.R.R. Tolkien', 295, true],
-    ['A Game of Thrones', 'George R.R. Martin', 694, true],
-    ['The Fellowship of the Ring', 'J.R.R. Tolkien', 398, false],
-    ['The Two Towers', 'J.R.R. Tolkien', 327, true],
-    ['The Return of the King', 'J.R.R. Tolkien', 347, false],
-    ['Kafka on the Shore', 'Haruki Murakami', 467, true],
-    ['Norwegian Wood', 'Haruki Murakami', 296, true],
-    ['The Wind-Up Bird Chronicle', 'Haruki Murakami', 607, false],
-    ['1Q84', 'Haruki Murakami', 925, true],
-    ['The Stand', 'Stephen King', 1153, true],
-    ['The Shining', 'Stephen King', 447, false],
-    ['Misery', 'Stephen King', 310, false],
-    ['The Gunslinger', 'Stephen King', 231, true],
-    ['The Drawing of the Three', 'Stephen King', 463, true],
-    ['The Waste Lands', 'Stephen King', 422, false],
-    ['Wizard and Glass', 'Stephen King', 845, true],
-    ['Wolves of the Calla', 'Stephen King', 714, false],
-    ['Pride and Prejudice', 'Jane Austen', 279, true],
-    ['Sense and Sensibility', 'Jane Austen', 409, false],
-    ['Emma', 'Jane Austen', 474, true],
-    ['Xenocide', 'Orson Scott Card', 592, false],
-    ['Children of the Mind', 'Orson Scott Card', 358, true],
-    ['Kings of the Wyld', 'Nicholas Eames', 502, true]
-  ];
-  const selectedBook = books[randomIndex];
-  addBook(selectedBook[0], selectedBook[1], selectedBook[2], selectedBook[3]);
 });
 
 function Book(id, title, author, pages, haveRead) {
@@ -49,24 +20,6 @@ function addBook(title, author, pages, haveRead) {
   library.push(book);
   bookIndex++;
   updateDisplay();
-}
-
-function removeBook(index) {
-
-}
-
-function toggleRead() {
-
-}
-
-function updateDisplay() {
-  display.innerHTML = "";
-
-  // Function to update the books in the display container
-  library.forEach((book, index) => {
-    const bookCard = createBookCard(book);
-    display.appendChild(bookCard);
-  });
 }
 
 function createBookCard(book) {
@@ -122,7 +75,17 @@ function createBookCard(book) {
   return bookCard;
 }
 
-// --- Handle btnRead events ---
+function updateDisplay() {
+  display.innerHTML = "";
+
+  // Function to update the books in the display container
+  library.forEach((book, index) => {
+    const bookCard = createBookCard(book);
+    display.appendChild(bookCard);
+  });
+}
+
+// --- Handle read button events ---
 function mouseOverRead() {
   const bookId = this.parentElement.dataset.id;
   const book = library.find(book => book.id == bookId);
@@ -157,6 +120,7 @@ function clickRead() {
   updateDisplay();
 }
 
+// --- Handle remove button events ---
 function mouseOverRemove() {
   this.children[0].setAttribute('src', './icons/delete-red.svg');
 }
@@ -173,7 +137,8 @@ function clickRemove() {
   updateDisplay();
 }
 
-// --- Handle dialog ---
+// --- Handle dialog and dialog form ---
+// Dialog will appear on page load, because there are no books to show
 const dialog = document.querySelector('dialog');
 dialog.showModal();
 
@@ -184,11 +149,11 @@ newBookForm.addEventListener('submit', (event) => {
   const bookTitle = newBookData.get('title');
   const bookAuthor = newBookData.get('author');
   const bookPages = newBookData.get('pages');
-  const bookReadStatus = newBookData.get('have-read') === 'on' ? 'Yes' : 'No';
+  const bookReadStatus = newBookData.get('have-read') === 'on' ? 'true' : 'false';
 
-  alert(`Title: ${bookTitle}\nAuthor: ${bookAuthor}\nPages: ${bookPages}\nRead: ${bookReadStatus}`);
-
+  addBook(bookTitle, bookAuthor, bookPages, bookReadStatus);
   event.preventDefault();
+  dialog.close();
 });
 
 const cancelFormBtn = document.querySelector('#cancel-new-book');
