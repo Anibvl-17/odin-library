@@ -6,6 +6,24 @@ addBookBtn.addEventListener('click', () => {
   addBook('The Martian', 'Andy Weir', 369, true);
 });
 
+const btnRead = document.querySelector('.btn-read');
+btnRead.addEventListener('mouseover', () => {
+  // check read state before changing icon
+});
+
+btnRead.addEventListener('mouseout', () => {
+  // check read state before changing icon
+});
+
+const btnRemove = document.querySelector('.btn-remove');
+btnRemove.addEventListener('mouseover', () => {
+  btnRemove.children[0].setAttribute('src', './icons/delete-red.svg');
+});
+
+btnRemove.addEventListener('mouseout', () => {
+  btnRemove.children[0].setAttribute('src', './icons/delete.svg');
+});
+
 const library = [];
 
 function Book(title, author, pages, haveRead) {
@@ -51,7 +69,7 @@ function createBookCard(book) {
   bookAuthor.textContent = book.author
   const bookPages = document.createElement('p');
   bookPages.className = 'book-pages';
-  bookPages.textContent = book.pages;
+  bookPages.textContent = `${book.pages} pages`;
   const bookRead = document.createElement('p');
   bookRead.className = 'book-read';
   bookRead.textContent = book.haveRead ? 'Read' : 'Not read yet';
