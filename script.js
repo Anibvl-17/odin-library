@@ -94,6 +94,7 @@ function createBookCard(book) {
   readBtn.classList.add('btn-read', 'icon-btn');
   readBtn.addEventListener('mouseover', mouseOverRead);
   readBtn.addEventListener('mouseout', mouseOutRead);
+  readBtn.addEventListener('click', clickRead);
 
   const readIcon = document.createElement('img');
   readIcon.setAttribute(
@@ -108,6 +109,7 @@ function createBookCard(book) {
   removeBtn.classList.add('btn-remove', 'icon-btn');
   removeBtn.addEventListener('mouseover', mouseOverRemove);
   removeBtn.addEventListener('mouseout', mouseOutRemove);
+  removeBtn.addEventListener('click', clickRemove);
 
   const removeIcon = document.createElement('img');
   removeIcon.setAttribute('src', './icons/delete.svg');
@@ -147,10 +149,26 @@ function mouseOutRead() {
   }
 }
 
+function clickRead() {
+  const bookId = this.parentElement.dataset.id;
+  const book = library.find(book => book.id == bookId);
+
+  book.haveRead = !book.haveRead;
+  updateDisplay();
+}
+
 function mouseOverRemove() {
   this.children[0].setAttribute('src', './icons/delete-red.svg');
 }
 
 function mouseOutRemove() {
   this.children[0].setAttribute('src', './icons/delete.svg');
+}
+
+function clickRemove() {
+  const bookId = this.parentElement.dataset.id;
+  const bookIndex = library.findIndex(book => book.id == bookId);
+
+  library.splice(bookIndex, 1);
+  updateDisplay();
 }
