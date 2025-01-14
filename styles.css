@@ -73,6 +73,12 @@ button {
     "read   read";
   align-items: center;
   column-gap: 1rem;
+  transition: ease 0.2s;
+}
+
+.book-card:hover {
+  box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.15);
+  filter: brightness(1.05)
 }
 
 .book-title {
