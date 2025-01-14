@@ -1,10 +1,12 @@
-:root {
-  /* Color palette from: https://colorhunt.co/palette/181c143c3d37697565ecdfcc   */
-  --bg-color: #181C14;
-  --card-bg-color: #3C3D37;
+:root { 
+  --bg-color: #fdfcdc;
+  --card-bg-color: #00afb9;
+  --card-border-color: #0081a7;
   --primary-color: #697565;
-  --accent-color: #ECDFCC;
-  --text-color: #ebebeb;
+  --accent-color: #f07167;
+  --text-color: white;
+  --red-color:	#de5a52;
+  --green-color:	#88d4ab;
 }
 
 html,
@@ -36,6 +38,7 @@ button {
   padding: 1rem 2rem;
   margin-bottom: 1rem;
   background-color: var(--accent-color);
+  color: white;
   font-size: 16px;
   font-weight: bold;
   border: none;
@@ -44,7 +47,6 @@ button {
 
 .display-container {
   width: 50%;
-  border: 2px solid hsl(from var(--primary-color) 0 0 25%);
   padding: 2rem;
   display: flex;
   flex-flow: row wrap;
@@ -54,7 +56,7 @@ button {
 .book-card {
   background-color: var(--card-bg-color);
   padding: 1rem;
-  border: 2px solid var(--primary-color);
+  border: 2px solid var(--card-border-color);
   border-radius: 8px;
   display: grid;
   grid-template-areas: 
@@ -88,8 +90,12 @@ button {
 .icon-btn {
   width: 24px;
   border-radius: 100%;
-  padding: 4px;
+  padding: 8px;
   transition: background-color ease 0.2s;
+}
+
+.icon-btn:active {
+  background-color: rgb(0, 0, 0, 0.2);
 }
 
 .icon-read {
