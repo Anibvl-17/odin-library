@@ -144,6 +144,8 @@ dialog.showModal();
 
 const newBookForm = document.forms.NewBookForm;
 newBookForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
   const newBookData = new FormData(newBookForm);
 
   const bookTitle = newBookData.get('title');
@@ -152,7 +154,8 @@ newBookForm.addEventListener('submit', (event) => {
   const bookReadStatus = newBookData.get('have-read') === 'on' ? true : false;
 
   addBook(bookTitle, bookAuthor, bookPages, bookReadStatus);
-  event.preventDefault();
+  
+  newBookForm.reset();
   dialog.close();
 });
 
