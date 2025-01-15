@@ -82,10 +82,27 @@ function createBookCard(book) {
   return bookCard;
 }
 
+function createPlaceholderBookCard() {
+  const placeholder = document.createElement("div");
+  placeholder.className = "book-card-placeholder";
+
+  const textElement = document.createElement("p");
+  textElement.textContent = "Press the \"Add Book\" button to add a new book!";
+  placeholder.appendChild(textElement);
+
+  return placeholder;
+}
+
 function updateDisplay() {
   display.innerHTML = "";
 
   // Function to update the books in the display container
+  if (library.length === 0) {
+    const placeholderCard = createPlaceholderBookCard();
+    display.appendChild(placeholderCard);
+    return;
+  }
+
   library.forEach((book, index) => {
     const bookCard = createBookCard(book);
     display.appendChild(bookCard);

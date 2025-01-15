@@ -262,3 +262,13 @@ form label[for="new-book-read"] {
   align-self: center;
   margin-bottom: 4px;
 }
+
+.book-card-placeholder {
+  height: 150px;
+  color: var(--secondary-color);
+  border: 2px dashed var(--secondary-color);
+  padding: 1rem;
+  border-radius: 8px;
+  display: grid;
+  place-content: center;
+}
