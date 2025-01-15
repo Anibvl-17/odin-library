@@ -96,14 +96,22 @@ h1 {
   text-transform: capitalize;
 }
 
+.book-author::before {
+  content: "by ";
+  font-style: normal;
+  font-weight: 400;
+  text-transform: lowercase;
+}
+
 .book-pages {
   grid-area: pages;
+  margin-top: 8px;
 }
 
 .book-read {
   grid-area: read;
   font-size: 14px;
-  margin-block: 4px;
+  margin-block: 8px;
 }
 
 .icon-btn {
