@@ -150,7 +150,6 @@ newBookForm.addEventListener('submit', (event) => {
   const bookAuthor = newBookData.get('author');
   const bookPages = newBookData.get('pages');
   const bookReadStatus = newBookData.get('have-read') === 'on' ? true : false;
-  alert(bookReadStatus);
 
   addBook(bookTitle, bookAuthor, bookPages, bookReadStatus);
   event.preventDefault();
