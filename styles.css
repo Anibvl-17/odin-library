@@ -107,7 +107,7 @@ h1 {
 }
 
 .icon-btn {
-  width: 24px;
+  width: 32px;
   padding: 4px;
   border-radius: 100%;
   transition: background-color ease 0.2s;
@@ -120,11 +120,11 @@ h1 {
   background-color: rgb(0, 0, 0, 0.2);
 }
 
-.icon-read {
+.btn-read {
   grid-area: icon-read;
 }
 
-.icon-remove {
+.btn-remove {
   grid-area: icon-remove;
 }
 
