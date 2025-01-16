@@ -1,11 +1,41 @@
-const library = [];
 let bookIndex = 0;
+const library = [];
 const display = document.querySelector(".display-container");
 
-const addBookBtn = document.querySelector(".add-book-btn");
-addBookBtn.addEventListener("click", () => {
+// Handle "Add book" button click
+document.querySelector(".add-book-btn").addEventListener("click", () => {
   dialog.showModal();
 });
+
+// Get dialog element. Note: the dialog will appear on page load, 
+// because there are no books to show
+const dialog = document.querySelector("dialog");
+dialog.showModal();
+
+// Handle form submit
+const newBookForm = document.forms.NewBookForm;
+newBookForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const newBookData = new FormData(newBookForm);
+
+  const bookTitle = newBookData.get("title");
+  const bookAuthor = newBookData.get("author");
+  const bookPages = newBookData.get("pages");
+  const bookReadStatus = newBookData.get("have-read") === "on" ? true : false;
+
+  addBook(bookTitle, bookAuthor, bookPages, bookReadStatus);
+
+  newBookForm.reset();
+  dialog.close();
+});
+
+// Handle form cancel
+document.querySelector("#cancel-new-book").addEventListener("click", () => {
+  newBookForm.reset();
+  dialog.close();
+});
+
 
 function Book(id, title, author, pages, haveRead) {
   this.id = id;
@@ -103,7 +133,7 @@ function updateDisplay() {
     return;
   }
 
-  library.forEach((book, index) => {
+  library.forEach((book) => {
     const bookCard = createBookCard(book);
     display.appendChild(bookCard);
   });
@@ -114,26 +144,20 @@ function mouseOverRead() {
   const bookId = this.parentElement.dataset.id;
   const book = library.find((book) => book.id == bookId);
 
-  if (book.haveRead) {
-    // If read state is true
-    this.children[0].setAttribute("src", "./icons/eye-remove-red.svg");
-  } else {
-    // If read state is false
-    this.children[0].setAttribute("src", "./icons/eye-plus-green.svg");
-  }
+  this.children[0].setAttribute(
+    "src",
+    book.haveRead ? "./icons/eye-remove-red.svg" : "./icons/eye-plus-green.svg"
+  );
 }
 
 function mouseOutRead() {
   const bookId = this.parentElement.dataset.id;
   const book = library.find((book) => book.id == bookId);
 
-  if (book.haveRead) {
-    // If read state is true
-    this.children[0].setAttribute("src", "./icons/eye-check.svg");
-  } else {
-    // If read state is false
-    this.children[0].setAttribute("src", "./icons/eye-plus.svg");
-  }
+  this.children[0].setAttribute(
+    "src",
+    book.haveRead ? "./icons/eye-check.svg" : "./icons/eye-plus.svg"
+  );
 }
 
 function clickRead() {
@@ -160,30 +184,3 @@ function clickRemove() {
   library.splice(bookIndex, 1);
   updateDisplay();
 }
-
-// --- Handle dialog and dialog form ---
-// Dialog will appear on page load, because there are no books to show
-const dialog = document.querySelector("dialog");
-dialog.showModal();
-
-const newBookForm = document.forms.NewBookForm;
-newBookForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const newBookData = new FormData(newBookForm);
-
-  const bookTitle = newBookData.get("title");
-  const bookAuthor = newBookData.get("author");
-  const bookPages = newBookData.get("pages");
-  const bookReadStatus = newBookData.get("have-read") === "on" ? true : false;
-
-  addBook(bookTitle, bookAuthor, bookPages, bookReadStatus);
-
-  newBookForm.reset();
-  dialog.close();
-});
-
-const cancelFormBtn = document.querySelector("#cancel-new-book");
-cancelFormBtn.addEventListener("click", () => {
-  dialog.close();
-});
