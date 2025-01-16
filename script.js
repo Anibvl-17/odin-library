@@ -1,3 +1,14 @@
+const TEXT_HAVE_READ = "Have read";
+const TEXT_NOT_READ_YET = "Not read yet";
+const TEXT_PLACEHOLDER = "Press the \"Add Book\" button to add a new book!";
+
+const ICON_EYE_PLUS = "./icons/eye-plus.svg";
+const ICON_EYE_PLUS_GREEN = "./icons/eye-plus-green.svg";
+const ICON_DELETE = "./icons/delete.svg";
+const ICON_DELETE_RED = "./icons/delete-red.svg";
+const ICON_EYE_REMOVE_RED = "./icons/eye-remove-red.svg";
+const ICON_EYE_CHECK = "./icons/eye-check.svg";
+
 let bookIndex = 0;
 const library = [];
 const display = document.querySelector(".display-container");
@@ -71,7 +82,7 @@ function createBookCard(book) {
 
   const bookRead = document.createElement("p");
   bookRead.className = "book-read";
-  bookRead.textContent = book.haveRead ? "Read" : "Not read yet";
+  bookRead.textContent = book.haveRead ? TEXT_HAVE_READ : TEXT_NOT_READ_YET;
 
   const readBtn = document.createElement("span");
   readBtn.classList.add("btn-read", "icon-btn");
@@ -82,7 +93,7 @@ function createBookCard(book) {
   const readIcon = document.createElement("img");
   readIcon.setAttribute(
     "src",
-    book.haveRead ? "./icons/eye-check.svg" : "./icons/eye-plus.svg"
+    book.haveRead ? ICON_EYE_CHECK : ICON_EYE_PLUS
   );
   readIcon.className = "icon-read";
 
@@ -95,7 +106,7 @@ function createBookCard(book) {
   removeBtn.addEventListener("click", clickRemove);
 
   const removeIcon = document.createElement("img");
-  removeIcon.setAttribute("src", "./icons/delete.svg");
+  removeIcon.setAttribute("src", ICON_DELETE);
   removeIcon.className = "icon-remove";
 
   removeBtn.appendChild(removeIcon);
@@ -117,7 +128,7 @@ function createPlaceholderBookCard() {
   placeholder.className = "book-card-placeholder";
 
   const textElement = document.createElement("p");
-  textElement.textContent = "Press the \"Add Book\" button to add a new book!";
+  textElement.textContent = TEXT_PLACEHOLDER;
   placeholder.appendChild(textElement);
 
   return placeholder;
@@ -146,7 +157,7 @@ function mouseOverRead() {
 
   this.children[0].setAttribute(
     "src",
-    book.haveRead ? "./icons/eye-remove-red.svg" : "./icons/eye-plus-green.svg"
+    book.haveRead ? ICON_EYE_REMOVE_RED : ICON_EYE_PLUS_GREEN
   );
 }
 
@@ -156,7 +167,7 @@ function mouseOutRead() {
 
   this.children[0].setAttribute(
     "src",
-    book.haveRead ? "./icons/eye-check.svg" : "./icons/eye-plus.svg"
+    book.haveRead ? ICON_EYE_CHECK : ICON_EYE_PLUS
   );
 }
 
@@ -170,11 +181,11 @@ function clickRead() {
 
 // --- Handle remove button events ---
 function mouseOverRemove() {
-  this.children[0].setAttribute("src", "./icons/delete-red.svg");
+  this.children[0].setAttribute("src", ICON_DELETE_RED);
 }
 
 function mouseOutRemove() {
-  this.children[0].setAttribute("src", "./icons/delete.svg");
+  this.children[0].setAttribute("src", ICON_DELETE);
 }
 
 function clickRemove() {
