@@ -47,13 +47,26 @@ document.querySelector("#cancel-new-book").addEventListener("click", () => {
   dialog.close();
 });
 
+class Book {
+  constructor(id, title, author, pages, haveRead) {
+    this.id = id;
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.haveRead = haveRead;
+  }
 
-function Book(id, title, author, pages, haveRead) {
-  this.id = id;
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.haveRead = haveRead;
+  toggleReadStatus() {
+    this.haveRead = !this.haveRead;
+  }
+
+  get id() {
+    return this._id;
+  }
+
+  set id(id) {
+    this._id = id;
+  }
 }
 
 function addBook(title, author, pages, haveRead) {
@@ -175,7 +188,7 @@ function clickRead() {
   const bookId = this.parentElement.dataset.id;
   const book = library.find((book) => book.id == bookId);
 
-  book.haveRead = !book.haveRead;
+  book.toggleReadStatus();
   updateDisplay();
 }
 
